@@ -99,3 +99,32 @@ keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", { desc 
 keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", { desc = "Run last debug session" })
 keymap.set("n", "<leader>dt", function() require('dap').terminate(); require('dapui').close() end, { desc = "Terminate debugging" })
 
+
+-- Jaanu Plugin Key Mappings
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- AI Refactoring
+keymap('n', '<leader>jr', ':AIRefactor<CR>', opts)
+keymap('n', '<leader>jrd', ':AIDeepRefactor<CR>', opts)
+
+-- AI Chat
+keymap('n', '<leader>jc', ':AIChat<CR>', opts)
+keymap('n', '<leader>jp', ':AIChat popup<CR>', opts)
+keymap('n', '<leader>jC', ':AICloseChat<CR>', opts)
+
+-- AI Code Explanation
+keymap('n', '<leader>je', ':AICodeExplain<CR>', opts)
+keymap('n', '<leader>jed', ':AIDeepExplain<CR>', opts)
+
+-- AI Error Diagnosis
+keymap('n', '<leader>jd', ':AIErrorDiagnosis<CR>', opts)
+
+-- Accept/Reject AI Changes in Chat Window
+keymap('n', '<leader>ja', function() require("jaanu.ui").accept_change() end, opts)
+keymap('n', '<leader>jr', function() require("jaanu.ui").reject_change() end, opts)
+
+-- Git Operations
+keymap('n', '<leader>jgs', ':GitStageFile ', { noremap = true }) -- Space for input
+keymap('n', '<leader>jgc', ':GitCommit ', { noremap = true })
+keymap('n', '<leader>jgd', ':GitDiffFile ', { noremap = true })
