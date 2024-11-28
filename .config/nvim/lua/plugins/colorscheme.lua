@@ -108,39 +108,130 @@
 -- }
 
 -- Tokyo Night Theme
-return {
-  -- https://github.com/folke/tokyonight.nvim
-  'folke/tokyonight.nvim', -- You can replace this with your favorite colorscheme
-  lazy = false, -- We want the colorscheme to load immediately when starting Neovim
-  priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
-  opts = {
-    -- Replace this with your scheme-specific settings or remove to use the defaults
-    transparent = true,
-    style = "night", -- other variations "storm, night, moon, day"
-  },
-  config = function(_, opts)
-    require('tokyonight').setup(opts) -- Replace this with your favorite colorscheme
-    vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
-  end
-}
-
--- Catppuccin Theme
 -- return {
---   -- https://github.com/catppuccin/nvim
---   'catppuccin/nvim',
---   name = "catppuccin", -- name is needed otherwise plugin shows up as "nvim" due to github URI
+--   -- https://github.com/folke/tokyonight.nvim
+--   'folke/tokyonight.nvim', -- You can replace this with your favorite colorscheme
 --   lazy = false, -- We want the colorscheme to load immediately when starting Neovim
 --   priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
 --   opts = {
---   --   -- Replace this with your scheme-specific settings or remove to use the defaults
---     -- transparent = true,
---     flavour = "mocha", -- "latte, frappe, macchiato, mocha"
+--     -- Replace this with your scheme-specific settings or remove to use the defaults
+--     transparent = true,
+--     style = "night", -- other variations "storm, night, moon, day"
 --   },
 --   config = function(_, opts)
---     require('catppuccin').setup(opts) -- Replace this with your favorite colorscheme
---     vim.cmd("colorscheme catppuccin") -- Replace this with your favorite colorscheme
+--     require('tokyonight').setup(opts) -- Replace this with your favorite colorscheme
+--     vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
 --   end
 -- }
+
+-- Catppuccin Theme
+-- Lazy.nvim Plugin Specification
+return {
+    {
+        "catppuccin/nvim", -- Catppuccin theme
+        name = "catppuccin",
+        priority = 1000, -- Ensure the theme loads first
+        config = function()
+            require("catppuccin").setup({
+                flavour = "mocha", -- Use Mocha for a dark background (similar to IntelliJ)
+                transparent_background = false, -- Solid background like IntelliJ
+                show_end_of_buffer = false, -- Hide `~` symbols at the end of buffers
+                term_colors = true, -- Enable terminal colors
+                dim_inactive = { -- Dim inactive windows
+                    enabled = true,
+                    shade = "dark",
+                    percentage = 0.2,
+                },
+                no_italic = false,
+                no_bold = false,
+                styles = { -- Match IntelliJ's syntax styling
+                    comments = { "italic" }, -- Italicized comments
+                    conditionals = { "bold" }, -- Bold conditionals (e.g., if, else)
+                    loops = { "bold" }, -- Bold loops
+                    functions = { "italic", "bold" }, -- Italic and bold functions
+                    keywords = { "bold" }, -- Bold keywords (e.g., return, const)
+                    strings = {}, -- Default strings
+                    variables = {}, -- Default variables
+                    numbers = { "bold" }, -- Bold numbers
+                    booleans = { "bold", "italic" }, -- Bold and italic booleans
+                    properties = {}, -- Default properties
+                    types = { "bold" }, -- Bold types
+                    operators = {}, -- Default operators
+                },
+                color_overrides = { -- Customize colors to resemble IntelliJ
+                    mocha = {
+                        base = "#1e1e2e", -- Dark background
+                        mantle = "#181825", -- Sidebar background
+                        crust = "#11111b", -- Statusline background
+                        text = "#c0caf5", -- Primary text color
+                        subtext1 = "#a6adc8", -- Secondary text color
+                        subtext0 = "#9399b2", -- Dimmed text
+                        overlay2 = "#737994", -- Comments and overlay text
+                        overlay1 = "#6c7986",
+                        overlay0 = "#565f89",
+                        surface2 = "#414868", -- Sidebar and inactive elements
+                        surface1 = "#2c313c", -- Popup and menu background
+                        surface0 = "#1e222a", -- Subtle inactive surfaces
+                        green = "#98c379", -- IntelliJ-like green for strings
+                        teal = "#56b6c2", -- Aqua highlights
+                        yellow = "#e5c07b", -- Yellow for constants
+                        blue = "#61afef", -- Bright blue for keywords
+                        purple = "#c678dd", -- Purple for functions
+                        red = "#e06c75", -- Red for errors
+                    },
+                },
+                custom_highlights = { -- Custom highlight groups to match IntelliJ
+                    Normal = { fg = "#c0caf5", bg = "#1e1e2e" },
+                    Comment = { fg = "#6c7986", style = { "italic" } },
+                    Function = { fg = "#c678dd", style = { "bold", "italic" } },
+                    Keyword = { fg = "#61afef", style = { "bold" } },
+                    String = { fg = "#98c379" },
+                    Variable = { fg = "#c0caf5" },
+                    Type = { fg = "#e5c07b", style = { "bold" } },
+                    Number = { fg = "#d19a66", style = { "bold" } },
+                    Boolean = { fg = "#d19a66", style = { "italic", "bold" } },
+                    Error = { fg = "#e06c75", style = { "bold" } },
+                    LineNr = { fg = "#565f89" },
+                    CursorLineNr = { fg = "#c0caf5", style = { "bold" } },
+                    Visual = { bg = "#3e4451" },
+                    Search = { fg = "#1e1e2e", bg = "#61afef", style = { "bold" } },
+                    MatchParen = { fg = "#e5c07b", bg = "#3e4451", style = { "bold" } },
+                },
+                integrations = { -- Enable plugin integrations
+                    treesitter = true, -- Treesitter syntax highlighting
+                    native_lsp = {
+                        enabled = true,
+                        virtual_text = {
+                            errors = { "italic" },
+                            hints = { "italic" },
+                            warnings = { "italic" },
+                            information = { "italic" },
+                        },
+                        underlines = {
+                            errors = { "underline" },
+                            hints = { "underline" },
+                            warnings = { "underline" },
+                            information = { "underline" },
+                        },
+                    },
+                    cmp = true, -- Completion framework
+                    gitsigns = true, -- Git integration
+                    telescope = true, -- Fuzzy finder
+                    nvimtree = true, -- File explorer
+                    which_key = true, -- Keybinding helper
+                    indent_blankline = { enabled = true, colored_indent_levels = true },
+                    dashboard = true, -- Startup dashboard
+                    markdown = true, -- Markdown highlighting
+                },
+            })
+
+            -- Load the theme
+            vim.cmd.colorscheme("catppuccin")
+        end,
+    },
+}
+
+
 
 -- Sonokai Theme
 -- return {

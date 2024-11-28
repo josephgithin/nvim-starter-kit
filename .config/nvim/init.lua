@@ -30,10 +30,10 @@ require("core.keymaps")
 
 
 -- Auto-enable showkeys at startup if enabled
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.g.auto_enable_showkeys then
-      vim.cmd("ShowkeysToggle")
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     if vim.g.auto_enable_showkeys then
+--       vim.cmd("ShowkeysToggle")
+--     end
+--   end,
+-- })
