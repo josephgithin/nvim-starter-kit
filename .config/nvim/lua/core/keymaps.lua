@@ -17,7 +17,7 @@ keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close split window" })
 keymap.set("n", "<leader>sj", "<C-w>-", { desc = "Decrease split window height" })
 keymap.set("n", "<leader>sk", "<C-w>+", { desc = "Increase split window height" })
 keymap.set("n", "<leader>sl", "<C-w>>5", { desc = "Increase split window width" })
-keymap.set("n", "<leader>sh", "<C-w><5", { desc = "Decrease split window width" })
+keymap.set("n", "<leader>si", "<C-w><5", { desc = "Decrease split window width" })
 
 -- Tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open a new tab" })
@@ -26,11 +26,11 @@ keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab" })
 
 -- Diff keymaps
-keymap.set("n", "<leader>cc", ":diffput<CR>", { desc = "Put diff changes to other buffer" })
-keymap.set("n", "<leader>cj", ":diffget 1<CR>", { desc = "Get changes from left buffer" })
-keymap.set("n", "<leader>ck", ":diffget 3<CR>", { desc = "Get changes from right buffer" })
-keymap.set("n", "<leader>cn", "]c", { desc = "Next diff hunk" })
-keymap.set("n", "<leader>cp", "[c", { desc = "Previous diff hunk" })
+keymap.set("n", "<leader>dc", ":diffput<CR>", { desc = "Put diff changes to other buffer" })
+keymap.set("n", "<leader>dj", ":diffget 1<CR>", { desc = "Get changes from left buffer" })
+keymap.set("n", "<leader>dk", ":diffget 3<CR>", { desc = "Get changes from right buffer" })
+keymap.set("n", "<leader>dn", "]c", { desc = "Next diff hunk" })
+keymap.set("n", "<leader>dp", "[c", { desc = "Previous diff hunk" })
 
 -- Quickfix keymaps
 keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "Open quickfix list" })
@@ -41,22 +41,23 @@ keymap.set("n", "<leader>ql", ":clast<CR>", { desc = "Go to last quickfix item" 
 keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
 
 -- Vim-maximizer
-keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "Toggle maximizer" })
+keymap.set("n", "<leader>mm", ":MaximizerToggle<CR>", { desc = "Toggle maximizer" })
 
 -- Nvim-tree
-keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>", { desc = "Focus on file explorer" })
-keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>", { desc = "Find file in explorer" })
+keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+keymap.set("n", "<leader>tf", ":NvimTreeFindFile<CR>", { desc = "Find file in explorer" })
+keymap.set("n", "<leader>tr", ":NvimTreeFocus<CR>", { desc = "Focus on file explorer" })
 
 -- Telescope
-keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "Find files" })
-keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "Live grep" })
-keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "List buffers" })
-keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Search help tags" })
-keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, { desc = "Fuzzy search in current buffer" })
-keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, { desc = "Document symbols" })
-keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, { desc = "Incoming calls (LSP)" })
-keymap.set("n", '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end, { desc = "Search methods with treesitter" })
+keymap.set("n", "<leader>ff", require('telescope.builtin').find_files, { desc = "Find files" })
+keymap.set("n", "<leader>fg", require('telescope.builtin').live_grep, { desc = "Live grep" })
+keymap.set("n", "<leader>fb", require('telescope.builtin').buffers, { desc = "List buffers" })
+keymap.set("n", "<leader>fh", require('telescope.builtin').help_tags, { desc = "Search help tags" })
+keymap.set("n", "<leader>fs", require('telescope.builtin').grep_string,{ desc = "search current word" })
+keymap.set("n", "<leader>fz", require('telescope.builtin').current_buffer_fuzzy_find,{ desc = "fuzzy search in current buffer" })
+keymap.set("n", "<leader>fo", require('telescope.builtin').lsp_document_symbols, { desc = "Document symbols" })
+keymap.set("n", "<leader>fi", require('telescope.builtin').lsp_incoming_calls, { desc = "Incoming calls (LSP)" })
+keymap.set("n", "<leader>fm", function() require('telescope.builtin').treesitter({default_text=":method:"}) end, { desc = "Search methods with treesitter" })
 
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Toggle Git blame" })
@@ -73,19 +74,19 @@ keymap.set("n", "<leader>h4", function() require("harpoon.ui").nav_file(4) end, 
 keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>", { desc = "Run REST query" })
 
 -- LSP keymaps
-keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = "Hover (LSP)" })
-keymap.set('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { desc = "Go to definition" })
-keymap.set('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', { desc = "Go to declaration" })
-keymap.set('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { desc = "Go to implementation" })
-keymap.set('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = "Go to type definition" })
-keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', { desc = "List references" })
-keymap.set('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { desc = "Signature help" })
-keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = "Rename symbol" })
-keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', { desc = "Format buffer" })
-keymap.set('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = "Code action" })
-keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Open diagnostics" })
-keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = "Go to previous diagnostic" })
-keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = "Go to next diagnostic" })
+keymap.set("n", "<leader>gg", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover (LSP)" })
+keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
+keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "Go to declaration" })
+keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "Go to implementation" })
+keymap.set("n", "<leader>gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { desc = "Go to type definition" })
+keymap.set("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "List references" })
+keymap.set("n", "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature help" })
+keymap.set("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename symbol" })
+keymap.set("n", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", { desc = "Format buffer" })
+keymap.set("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code action" })
+keymap.set("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open diagnostics" })
+keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { desc = "Go to previous diagnostic" })
+keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { desc = "Go to next diagnostic" })
 
 -- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })
@@ -99,32 +100,16 @@ keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", { desc 
 keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", { desc = "Run last debug session" })
 keymap.set("n", "<leader>dt", function() require('dap').terminate(); require('dapui').close() end, { desc = "Terminate debugging" })
 
-
 -- Jaanu Plugin Key Mappings
-local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
--- AI Refactoring
-keymap('n', '<leader>jr', ':AIRefactor<CR>', opts)
-keymap('n', '<leader>jrd', ':AIDeepRefactor<CR>', opts)
-
--- AI Chat
-keymap('n', '<leader>jc', ':AIChat<CR>', opts)
-keymap('n', '<leader>jp', ':AIChat popup<CR>', opts)
-keymap('n', '<leader>jC', ':AICloseChat<CR>', opts)
-
--- AI Code Explanation
-keymap('n', '<leader>je', ':AICodeExplain<CR>', opts)
-keymap('n', '<leader>jed', ':AIDeepExplain<CR>', opts)
-
--- AI Error Diagnosis
-keymap('n', '<leader>jd', ':AIErrorDiagnosis<CR>', opts)
-
--- Accept/Reject AI Changes in Chat Window
-keymap('n', '<leader>ja', function() require("jaanu.ui").accept_change() end, opts)
-keymap('n', '<leader>jr', function() require("jaanu.ui").reject_change() end, opts)
-
+keymap.set("n", "<leader>ai", ":AIRefactor<CR>", { desc = "AI Refactor" })
+keymap.set("n", "<leader>ac", ":AIChat<CR>", { desc = "AI Chat" })
+keymap.set("n", "<leader>ax", ":AICloseChat<CR>", { desc = "Close AI Chat" })
+keymap.set("n", "<leader>ad", ":AICodeExplain<CR>", { desc = "AI Code Explanation"})
 -- Git Operations
-keymap('n', '<leader>jgs', ':GitStageFile ', { noremap = true }) -- Space for input
-keymap('n', '<leader>jgc', ':GitCommit ', { noremap = true })
-keymap('n', '<leader>jgd', ':GitDiffFile ', { noremap = true })
+keymap.set("n", "<leader>gs", ":GitStageFile<Space>", { desc = "Git Stage File" })
+keymap.set("n", "<leader>gc", ":GitCommit<Space>", { desc = "Git Commit" })
+keymap.set("n", "<leader>gd", ":GitDiffFile<Space>", { desc = "Git Diff File" })
+
+-- extra keymaps to copy and paste
+keymap.set("n", "<leader>P", "\"+p", { desc = "Paste from system clipboard" })
+keymap.set("n", "<leader>Y", "\"+y", { desc = "Copy to system clipboard" })
